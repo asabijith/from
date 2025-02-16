@@ -72,11 +72,11 @@
         try {
             const countDoc = await db.collection('metadata').doc('count').get();
             const currentCount = countDoc.exists ? countDoc.data().count : 0;
-            const remainingSlots = 8 - currentCount;
+            const remainingSlots = 30 - currentCount;
             
             applicationsCount.textContent = `Applications remaining: ${remainingSlots}`;
             
-            if (currentCount >= 8) {
+            if (currentCount >= 30) {
                 form.style.display = 'none';
                 showAlert('Application window has closed. Thank you for your interest.', 'warning');
                 return false;
@@ -118,7 +118,7 @@
                 const countDoc = await transaction.get(countRef);
                 const currentCount = countDoc.exists ? countDoc.data().count : 0;
 
-                if (currentCount >= 8) {
+                if (currentCount >= 30) {
                     throw new Error('Application limit reached. No more submissions accepted.');
                 }
 
